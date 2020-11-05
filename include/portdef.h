@@ -28,16 +28,16 @@
 #define IMU_PORT 11
 
 // New PORT extender
-#define PORT_EXTENDER 18
+#define EXTENDER_PORT 18
 
 // New Distance Sensor
-#define DISTANCE_SENSOR 19
+#define DISTANCE_PORT 19
 
 // New rotation Sensor
-#define ROTATION_SENSOR 5
+#define ROTATION_PORT 5
 
 // New optical Sensor
-#define OPTICAL_SENSOR 6
+#define OPTICAL_PORT 6
 
 // ----------- Radio and Controllers ---------------
 #define VEX_RADIO 21
