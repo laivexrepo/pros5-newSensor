@@ -82,7 +82,8 @@ void opcontrol() {
 
 	while (true) {
     std::cout << "Distance: " << distance_sensor.get() <<  " mm\n";
-
+    std::cout << "Distance Object Velocity: " << distance_sensor.get_object_velocity() << " m/s \n";
+    std::cout << "Object size: " << distance_sensor.get_object_size() << " \n";
 		pros::delay(20);
 	}
 }
