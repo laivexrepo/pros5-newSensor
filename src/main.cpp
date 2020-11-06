@@ -81,6 +81,8 @@ void autonomous() {}
 void opcontrol() {
 
 	while (true) {
+    // Lets contineously read the distance sensor data and write
+    // to console.
     std::cout << "Distance: " << distance_sensor.get() <<  " mm\n";
     std::cout << "Distance Object Velocity: " << distance_sensor.get_object_velocity() << " m/s \n";
     std::cout << "Object size: " << distance_sensor.get_object_size() << " \n";
