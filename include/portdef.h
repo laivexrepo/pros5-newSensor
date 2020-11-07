@@ -37,7 +37,7 @@
 #define ROTATION_PORT 5
 
 // New optical Sensor
-#define OPTICAL_PORT 6
+#define OPTICAL_PORT 12
 
 // ----------- Radio and Controllers ---------------
 #define VEX_RADIO 21

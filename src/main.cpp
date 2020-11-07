@@ -1,6 +1,7 @@
 #include "main.h"
 #include "portdef.h"
 #include "globals.h"
+//#include "pros/optical.h"
 
 /**
  * Put callback functions here.
@@ -32,6 +33,8 @@ void initialize() {
 	std::cout << "IMU is done calibrating (took: " << iter - time << "ms \n";
 
   pros::Distance distance_sensor(DISTANCE_PORT);
+
+  pros::Optical optical_sensor(OPTICAL_PORT);
 }
 
 /**
@@ -80,8 +83,15 @@ void autonomous() {}
  */
 void opcontrol() {
 
-  int sensorTest = 1;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
+  int sensorTest = 2;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
                           // 3 = rotational sensor default = all sensors
+
+  pros::c::optical_rgb_s_t RGB_values;          // We need tp get this from the C api....
+                                                // it is the structure for the RGB return
+
+  optical_sensor.disable_gesture();             // Disable gesture mode
+  optical_sensor.set_led_pwm(50);
+
 	while (true) {
     // Lets contineously read the selected sensor data and write
     // to console.
@@ -97,9 +107,16 @@ void opcontrol() {
       break;
 
       case 2 :
+        std::cout << "Hue: " << optical_sensor.get_hue() << " ";
+        std::cout << "Saturation: " << optical_sensor.get_saturation() << " ";
+        std::cout << "Brithgness: " << optical_sensor.get_brightness() << " ";
+        std::cout << "Proximity: " << optical_sensor.get_proximity() << " \n";
+        RGB_values = optical_sensor.get_rgb();
+        std::cout << "RGB: R=" << RGB_values.red << " G=" << RGB_values.green << " B=";
+        std::cout << RGB_values.blue << " Brightness=" << RGB_values.brightness << "\n";
 
       break;
-      
+
       default :
         // Distance Sensor
         std::cout << "Distance: " << distance_sensor.get() <<  " mm";
