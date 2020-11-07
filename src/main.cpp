@@ -80,12 +80,30 @@ void autonomous() {}
  */
 void opcontrol() {
 
+  int sensorTest = 1;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
+                          // 3 = rotational sensor default = all sensors
 	while (true) {
-    // Lets contineously read the distance sensor data and write
+    // Lets contineously read the selected sensor data and write
     // to console.
-    std::cout << "Distance: " << distance_sensor.get() <<  " mm\n";
-    std::cout << "Distance Object Velocity: " << distance_sensor.get_object_velocity() << " m/s \n";
-    std::cout << "Object size: " << distance_sensor.get_object_size() << " \n";
+    switch(sensorTest) {
+      case 0 :
+        std::cout << "No sensor selected \n";
+      break;
+
+      case 1 :          // distance sensor
+        std::cout << "Distance: " << distance_sensor.get() <<  " mm";
+        std::cout << " Velocity: " << distance_sensor.get_object_velocity() << " m/s ";
+        std::cout << " Size: " << distance_sensor.get_object_size() << " \n";
+      break;
+
+      default :
+        // Distance Sensor 
+        std::cout << "Distance: " << distance_sensor.get() <<  " mm";
+        std::cout << " Velocity: " << distance_sensor.get_object_velocity() << " m/s ";
+        std::cout << " Size: " << distance_sensor.get_object_size() << " \n";
+      break;
+
+    }
 		pros::delay(20);
 	}
 }
