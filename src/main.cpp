@@ -96,8 +96,12 @@ void opcontrol() {
         std::cout << " Size: " << distance_sensor.get_object_size() << " \n";
       break;
 
+      case 2 :
+
+      break;
+      
       default :
-        // Distance Sensor 
+        // Distance Sensor
         std::cout << "Distance: " << distance_sensor.get() <<  " mm";
         std::cout << " Velocity: " << distance_sensor.get_object_velocity() << " m/s ";
         std::cout << " Size: " << distance_sensor.get_object_size() << " \n";
