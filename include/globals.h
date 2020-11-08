@@ -13,6 +13,7 @@ extern pros::Imu imu_sensor;
 // ------------ Define the port Extender  -------------------------------------
 extern pros::Distance distance_sensor;
 extern pros::Optical optical_sensor;
+extern pros::Rotation rotation_sensor;
 
 // ------------ Global accessible functions -------------------------------
 extern void robotDataLogger();

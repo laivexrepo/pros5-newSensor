@@ -1,7 +1,6 @@
 #include "main.h"
 #include "portdef.h"
 #include "globals.h"
-//#include "pros/optical.h"
 
 /**
  * Put callback functions here.
@@ -35,6 +34,8 @@ void initialize() {
   pros::Distance distance_sensor(DISTANCE_PORT);
 
   pros::Optical optical_sensor(OPTICAL_PORT);
+
+  pros::Rotation rotation_sensor(ROTATION_PORT);
 }
 
 /**
@@ -86,11 +87,19 @@ void opcontrol() {
   int sensorTest = 2;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
                           // 3 = rotational sensor default = all sensors
 
+  // Special setup for the optical sensor - soem functionailty coems via the C api only and
+  // does must as such be declared in.
+
   pros::c::optical_rgb_s_t RGB_values;          // We need tp get this from the C api....
                                                 // it is the structure for the RGB return
 
   optical_sensor.disable_gesture();             // Disable gesture mode
-  optical_sensor.set_led_pwm(50);
+  optical_sensor.set_led_pwm(50);               // set the LED to 50% to help with relfective color detect
+                                                // ine following detect
+
+  // Rotation sensro setup - direction and Reset
+  rotation_sensor.reverse();  //Rotation sensor recently reversed
+  rotation_sensor.reset();    //Reset encoder - zero position
 
 	while (true) {
     // Lets contineously read the selected sensor data and write
@@ -114,6 +123,9 @@ void opcontrol() {
         RGB_values = optical_sensor.get_rgb();
         std::cout << "RGB: R=" << RGB_values.red << " G=" << RGB_values.green << " B=";
         std::cout << RGB_values.blue << " Brightness=" << RGB_values.brightness << "\n";
+      break;
+
+      case 3 :
 
       break;
 
@@ -122,6 +134,15 @@ void opcontrol() {
         std::cout << "Distance: " << distance_sensor.get() <<  " mm";
         std::cout << " Velocity: " << distance_sensor.get_object_velocity() << " m/s ";
         std::cout << " Size: " << distance_sensor.get_object_size() << " \n";
+        // Optical Sensor
+        std::cout << "Hue: " << optical_sensor.get_hue() << " ";
+        std::cout << "Saturation: " << optical_sensor.get_saturation() << " ";
+        std::cout << "Brithgness: " << optical_sensor.get_brightness() << " ";
+        std::cout << "Proximity: " << optical_sensor.get_proximity() << " \n";
+        RGB_values = optical_sensor.get_rgb();
+        std::cout << "RGB: R=" << RGB_values.red << " G=" << RGB_values.green << " B=";
+        std::cout << RGB_values.blue << " Brightness=" << RGB_values.brightness << "\n";
+
       break;
 
     }
