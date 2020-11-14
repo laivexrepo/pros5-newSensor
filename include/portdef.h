@@ -34,7 +34,7 @@
 #define DISTANCE_PORT 19
 
 // New rotation Sensor
-#define ROTATION_PORT 5
+#define ROTATION_PORT 13
 
 // New optical Sensor
 #define OPTICAL_PORT 12
