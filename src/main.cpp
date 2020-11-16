@@ -91,8 +91,9 @@ void autonomous() {}
  */
 void opcontrol() {
   // ---------------------------- WHICH SENSOR TO TEST -----------------------------------------------------------
-  int sensorTest = 2;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
-                          // 3 = rotational sensor  4 = special case do not run while loop
+  int sensorTest = 4;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
+                          // 3 = rotational sensor 4 = IMU test
+                          // 5 = special case do not run while loop
                           // default = all sensors  (set the value to say 10) to trigger default
 
   // ---------------------------- OPTICAL SENSOR -----------------------------------------------------------------
@@ -133,6 +134,10 @@ void opcontrol() {
   int totalPosition = 0;
   int endPosition = 0;
   float distanceTraveled = 0.0;
+
+  // --------------------------- IMU -----------------------------------------------------------------------------
+  pros::c::quaternion_s_t qt;       // store Quarternion data strature on IMU call 
+
   // --------------------------- HELP RUNNING LOOP FOR TESTING ---------------------------------------------------
   bool controlLoop = true;
   bool useLoopLimit = true;        // Do we want to loop for a number of times?
@@ -147,6 +152,7 @@ void opcontrol() {
     switch(sensorTest) {
       case 0 :
         std::cout << "No sensor selected \n";
+        controlLoop = false;            // break out of loop
       break;
 
       case 1 :          // distance sensor
@@ -166,17 +172,23 @@ void opcontrol() {
       break;
 
       case 3 :
-      std::cout << "Position: " << rotation_sensor.get_position() <<  " ";
-      std::cout << "Reversed: " << rotation_sensor.get_reversed() <<  " \n";
-      std::cout << "Velocity: " << rotation_sensor.get_velocity() <<  " cdeg/s";
-      rpm = (rotation_sensor.get_velocity() / 36000.00) * 60.0;
-      std::cout << " = " << std::fixed << std::setprecision(4) << rpm <<  " rpm ";
-      linearVelocity = ((2 * 3.14) / 60) * wheelRadius * rpm;
-      std::cout << " Linear Velocity " << std::fixed << std::setprecision(4) << linearVelocity <<  " m/s \n";
-      endPosition =  rotation_sensor.get_position();
+        std::cout << "Position: " << rotation_sensor.get_position() <<  " ";
+        std::cout << "Reversed: " << rotation_sensor.get_reversed() <<  " \n";
+        std::cout << "Velocity: " << rotation_sensor.get_velocity() <<  " cdeg/s";
+        rpm = (rotation_sensor.get_velocity() / 36000.00) * 60.0;
+        std::cout << " = " << std::fixed << std::setprecision(4) << rpm <<  " rpm ";
+        linearVelocity = ((2 * 3.14) / 60) * wheelRadius * rpm;
+        std::cout << " Linear Velocity " << std::fixed << std::setprecision(4) << linearVelocity <<  " m/s \n";
+        endPosition =  rotation_sensor.get_position();
       break;
 
       case 4 :
+        std::cout << "Current Heading: " << imu_sensor.get_heading() << " ";
+        qt = imu_sensor.get_quaternion();
+        std::cout << "Quaternion: x:" << qt.x << " y:" << qt.y << " z:" << qt.z << " w:" << qt.w << " \n";
+      break;
+
+      case 5 :
         controlLoop = false;            // break out of loop
       break;
 
