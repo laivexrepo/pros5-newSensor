@@ -93,7 +93,7 @@ void opcontrol() {
   // ---------------------------- WHICH SENSOR TO TEST -----------------------------------------------------------
   int sensorTest = 4;     // which sensor to test? 0 = no sensor, 1 = distance sensor, 2 = optical sensor;
                           // 3 = rotational sensor 4 = IMU test
-                          // 5 = special case do not run while loop
+                          //
                           // default = all sensors  (set the value to say 10) to trigger default
 
   // ---------------------------- OPTICAL SENSOR -----------------------------------------------------------------
@@ -136,7 +136,7 @@ void opcontrol() {
   float distanceTraveled = 0.0;
 
   // --------------------------- IMU -----------------------------------------------------------------------------
-  pros::c::quaternion_s_t qt;       // store Quarternion data strature on IMU call 
+  pros::c::quaternion_s_t qt;       // store Quarternion data strature on IMU call
 
   // --------------------------- HELP RUNNING LOOP FOR TESTING ---------------------------------------------------
   bool controlLoop = true;
@@ -188,10 +188,6 @@ void opcontrol() {
         std::cout << "Quaternion: x:" << qt.x << " y:" << qt.y << " z:" << qt.z << " w:" << qt.w << " \n";
       break;
 
-      case 5 :
-        controlLoop = false;            // break out of loop
-      break;
-
       default :
         // Distance Sensor
         std::cout << "Distance: " << distance_sensor.get() <<  " mm";
@@ -205,6 +201,10 @@ void opcontrol() {
         RGB_values = optical_sensor.get_rgb();
         std::cout << "RGB: R=" << RGB_values.red << " G=" << RGB_values.green << " B=";
         std::cout << RGB_values.blue << " Brightness=" << RGB_values.brightness << "\n";
+        // IMU
+        std::cout << "Current Heading: " << imu_sensor.get_heading() << " ";
+        qt = imu_sensor.get_quaternion();
+        std::cout << "Quaternion: x:" << qt.x << " y:" << qt.y << " z:" << qt.z << " w:" << qt.w << " \n";
         // Rotation sensor
         std::cout << "Position: " << rotation_sensor.get_position() <<  " ";
         std::cout << "Reversed: " << rotation_sensor.get_reversed() <<  " \n";
