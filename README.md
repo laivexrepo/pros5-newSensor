@@ -1,7 +1,7 @@
 # pros5-newSensor
 PROSV5 New Sensor Test Code which can be used as a starting testbed to better understand the new Rotation Sensor, Optical Sensor, Distance Sensor and IMU.
 
-The code use a selector to switch to a particular sensor to test and evaluate.  The variable sensorTest may have either be one of the following values:
+The code uses a selector to switch to a particular sensor to test and evaluate.  The variable sensorTest may have either one of the following values:
 
 0 - no sensor code is tested
 1 - V5 Distance Sensor
