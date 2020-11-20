@@ -15,7 +15,11 @@ pros::Imu imu_sensor(IMU_PORT);
 
 // ----------------- DISTANCE SENSOR -------------------------------------------
 pros::Distance distance_sensor(DISTANCE_PORT);
+
+// ----------------- OPTICAL SENSOR -------------------------------------------
 pros::Optical optical_sensor(OPTICAL_PORT);
+
+// ----------------- ROTATION SENSOR -------------------------------------------
 pros::Rotation rotation_sensor(ROTATION_PORT);
 
 // --------------------- Global Function definitions ---------------------------

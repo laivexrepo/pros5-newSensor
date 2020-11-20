@@ -123,7 +123,7 @@ void opcontrol() {
   pros::delay(100);	          // give sensor time to settle in
 
   // set the rotation sensor to a specified position
-  //rotation_sensor.set_position(18000);      // degrees in centi degrees - 180 degrees is 18000 cneti degrees
+  //rotation_sensor.set_position(18000);      // degrees in centi degrees - 180 degrees is 18000 centi degrees
   pros::delay(100);	          // give sensor time to settle in
 
   float rpm = 0.0;            // variable for rpm calculation
@@ -140,9 +140,9 @@ void opcontrol() {
 
   // --------------------------- HELP RUNNING LOOP FOR TESTING ---------------------------------------------------
   bool controlLoop = true;
-  bool useLoopLimit = true;        // Do we want to loop for a number of times?
+  bool useLoopLimit = true;         // Do we want to loop for a number of times?
                                     // If set to true - use maxLoopCount to set
-                                    // the number of times we run the testign loop
+                                    // the number of times we run the testing loop
   int loopCount = 0;
   int maxLoopCount = 10;
 
