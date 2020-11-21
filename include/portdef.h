@@ -7,7 +7,7 @@
 
 // When you have two motors per side in your drive train, add second set of
 // motor port definitions
-#define LEFT_MOTOR_PORT_2  9    // when two motors perside drive train
+#define LEFT_MOTOR_PORT_2  9    // when two motors per side drive train
 #define RIGHT_MOTOR_PORT_2  2
 
 // Lift motors
